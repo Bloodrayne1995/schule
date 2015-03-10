@@ -13,6 +13,10 @@ import java.awt.*;
 public class PascalDreieck extends JPanel{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Das Dreieck in einem zwei-dimensionalen Array 
 	 */
 	private int dreieck[][] = null;

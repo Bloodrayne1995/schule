@@ -2,7 +2,6 @@ package farben;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.util.*;
 
 import javax.swing.*;
@@ -10,6 +9,10 @@ import javax.swing.table.TableCellRenderer;
 
 public class FarbenArray extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Farbe> data = new ArrayList<Farbe>();
 	private JTable tabelle = null;
 	

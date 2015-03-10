@@ -2,7 +2,6 @@ package primzahlen;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -55,18 +54,6 @@ public class GUIGraphenPanel extends JPanel {
 		
 	}
 	
-	private void zeichneGraphen(ErgebnisDaten x, Color f,Graphics d){
-		d.setColor(f);
-		Point x1 = null;
-		Point x2 = null;
-		x1 = new Point(0,this.getHeight() - 10 );
-		for(int i = 1; i < x.getObegrenze();i++){
-			x2 = new Point(i,x.getTime(i));
-			d.drawLine(x1.x + 10,x1.y , x2.x + 10,x2.y);
-			x1 = x2;
-		}
-		d.setColor(Color.black);
-	}
 	
 	public void paint(Graphics g){
 		super.paint(g);

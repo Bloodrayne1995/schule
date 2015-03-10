@@ -11,6 +11,10 @@ import pascaldreieck.PascalDreieck;
 
 public class PascalGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private PascalDreieck pascal = new PascalDreieck(); 
 	private int laenge = 50;
 	private FarbenArray farben = new FarbenArray();

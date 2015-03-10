@@ -5,6 +5,10 @@ import javax.swing.JFrame;
 public class GUIFrame extends JFrame {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	GUIGraphenPanel pnl = new GUIGraphenPanel();
 	
 	public static void main(String[] args) {
