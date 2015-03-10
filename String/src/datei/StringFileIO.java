@@ -18,6 +18,7 @@ public class StringFileIO {
 				System.out.println(textZeile);
 				textZeile = meinLeseStream.readLine();
 			}
+			System.out.println("############### ENDE DER DATEI #################");
 		}catch(Exception e){}
 	}
 	
