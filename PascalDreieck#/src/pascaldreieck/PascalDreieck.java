@@ -106,8 +106,8 @@ public class PascalDreieck extends JPanel{
 	public void paint(Graphics g){
 		super.paint(g);
 		
-		int breite = 10;
-		int hoehe = 10;
+		int breite = 20;
+		int hoehe = 20;
 		int startX = this.getWidth() / 2 - breite / 2;
 		int startY = 0;
 		int laufX = 0;
