@@ -1,58 +1,27 @@
 package datei;
 
-public class HTMLDatei {
+import javax.swing.text.Document;
 
-	private String fileName = "";
-	private StringFileIO fileObject = new StringFileIO();
-	
-	
+public class HTMLDatei extends StringFileIO{
+
 	public HTMLDatei(){
 		
 	}
 	
 	public HTMLDatei(String fileName){
-		this.fileName = fileName;
-		load();
+		this.setDateiName(fileName);
+		this.leseDatei();
 	}
 	
-	
-	private void load(){
-		fileObject.setDateiName(fileName);
-		fileObject.leseDatei();
-	}
-	
-	public void load(String fileName){
-		this.fileName=fileName;
-		load();
-	}
-	
-	public String getZeile(int index){
-		if(index > fileObject.getDatei().size() || index < 0){
-			return "Zeile ist nicht vorhanden";
+	public void setDateiName(String fileName){
+		if(fileName.endsWith(".htm") || fileName.endsWith(".html") || fileName.endsWith(".hta")){
+			super.setDateiName(fileName);
 		}else{
-			return fileObject.getDatei().get(index);
+			System.out.println("Datei muss eine HTML-Datei sein");
 		}
 	}
 	
-	public void showAllLines(){
-		for(int i = 0; i < fileObject.getDatei().size(); i++){
-			System.out.println(getZeile(i));
-		}
-	}
 	
-	public void showZeilenWithSearch(String s){
-		int zeilen[] = fileObject.getZeileSuchText(s);
-		for(int i = 0; i < zeilen.length;i++){
-			System.out.println(zeilen[i] + " : " + getZeile(zeilen[i]));
-		}
-	}
-	
-	public void showZeilenWithRegExp(String expr){
-		int zeilen[] = fileObject.getZeileRegExp(expr);
-		for(int i = 0; i < zeilen.length; i++){
-			System.out.println(zeilen[i] + " : " + getZeile(zeilen[i]));
-		}
-	}
 	
 	
 }
