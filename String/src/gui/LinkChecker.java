@@ -2,14 +2,9 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpConnection;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.methods.GetMethod;
-
 
 
 public class LinkChecker implements Runnable {
@@ -42,17 +37,13 @@ public class LinkChecker implements Runnable {
 	@Override
 	public void run() {
 		try{
+			URL x = new URL(link);
+			HttpURLConnection connection = (HttpURLConnection) x.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			connection.setRequestProperty("Content-Language", "en-US"); 
 			
-			HttpClient x = new HttpClient();
-			x.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
 			
-			x.getHostConfiguration().setProxy("10.0.0.1", 8080);
-						
-			HttpMethod m = new GetMethod(link);
-			
-			int result = x.executeMethod(m);
-			
-			raiseEvents(String.valueOf(result));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
