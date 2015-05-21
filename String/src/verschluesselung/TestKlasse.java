@@ -4,13 +4,16 @@ public class TestKlasse {
 
 	
 	public static void main(String args[]){
-		CaesarVerschluesselung x = new CaesarVerschluesselung(3);
+		String pw = "";
+		if(args.length >0){
+			pw = args[0];
+		}
 		
-		String o = "APFEL";
-		String g = "GDV-ZDU-JHKHLP";
+		Passwort t = new Passwort();
+		t.setPasswort("Ab$10hallo");
 		
-		System.out.println(x.verschluessele(o));
-		System.out.println(x.entschluessele(g));
+		t.login();
+		
 	}
 	
 }
