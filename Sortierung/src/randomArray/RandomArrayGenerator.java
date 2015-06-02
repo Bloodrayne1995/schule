@@ -9,7 +9,7 @@ public class RandomArrayGenerator {
 	 * @param obergrenze Größe des Feldes
 	 * @return
 	 */
-	public int[] getRandomArray(int obergrenze){
+	public static int[] getRandomArray(int obergrenze){
 		int arr[] = new int[obergrenze];
 		
 		for(int i = 0; i < arr.length;i++){

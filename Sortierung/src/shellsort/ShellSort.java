@@ -47,5 +47,20 @@ public class ShellSort {
 		
 	}
 	
+	public boolean isSorted(int liste[]){
+		boolean erg = true;
+		int zahlV = liste[0];
+		for(int i = 1; i < liste.length; i++){
+			if(zahlV > liste[i]){
+				erg = false;
+				i = liste.length;
+			}else{
+				zahlV = liste[i];
+			}
+		}
+		return erg;
+		
+	}
+	
 	
 }
