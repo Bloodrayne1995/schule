@@ -1,16 +1,22 @@
 package quicksort;
 
-public class QuickSort {
+public class QuickSort{
 
-	int liste[] = { 7, 4, 1, 8, 5, 2, 9, 6, 3, 0 };
+	int liste[] = { 5, 4, 7, 8, 1, 2, 9, 6, 3, 0 };
 	int anzahl = 1;
+	int anzahl_vergleiche = 0;
 
 	public static void main(String[] args) {
 		QuickSort meinSort = new QuickSort();
-		//meinSort.ausgabeListe();
+		meinSort.ausgabeListe();
 		meinSort.quickSort(0, 9);
-		//meinSort.ausgabeListe();
+		meinSort.ausgabeListe();
+		meinSort.showAnzahlVergleiche();
 		
+	}
+	
+	public void showAnzahlVergleiche(){
+		System.out.println("Anzahl Vergleiche: "  + anzahl_vergleiche);
 	}
 
 	public void quickSort(int links, int rechts) {
@@ -24,20 +30,22 @@ public class QuickSort {
 		do {
 			while (liste[vorLinks] < mitte) {
 				vorLinks++;
+				anzahl_vergleiche++;
 			}
 
 			while (liste[vorRechts] > mitte) {
 				vorRechts--;
+				anzahl_vergleiche++;
 			}
 
 			if (vorLinks <= vorRechts) {
-				//System.out.println("VL: " + vorLinks + " | VR: " + vorRechts);
+				System.out.println("VL: " + vorLinks + " | VR: " + vorRechts);
 				hilfe = liste[vorLinks];
 				liste[vorLinks] = liste[vorRechts];
 				liste[vorRechts] = hilfe;
 				vorLinks++;
 				vorRechts--;
-				//ausgabeListe();
+				ausgabeListe();
 			}
 		} while (vorLinks <= vorRechts);
 		//ausgabeListe();
@@ -51,7 +59,7 @@ public class QuickSort {
 	}
 
 	public void ausgabeListe() {
-		System.out.print(anzahl +" ==> ");
+		//System.out.print(anzahl +" ==> ");
 		for (int i = 0; i < liste.length; i++) {
 			System.out.print(liste[i]);
 			if(i < liste.length - 1){
@@ -59,8 +67,9 @@ public class QuickSort {
 			}
 		}
 		System.out.print("\n");
-		System.out.print("\n");
+		//System.out.print("\n");
 		anzahl++;
 	}
+
 
 }
