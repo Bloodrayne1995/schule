@@ -5,6 +5,9 @@ public class QuickSort{
 	int liste[] = { 5, 4, 7, 8, 1, 2, 9, 6, 3, 0 };
 	int anzahl = 1;
 	int anzahl_vergleiche = 0;
+	boolean multithreaded = false; 
+	boolean fertig = false;
+	int lastThread = 0;
 
 	public static void main(String[] args) {
 		QuickSort meinSort = new QuickSort();
@@ -24,6 +27,10 @@ public class QuickSort{
 		System.out.println("Anzahl Vergleiche: "  + anzahl_vergleiche);
 	}
 
+	public void setMT(boolean x){
+		multithreaded = x;
+	}
+	
 	public void quickSort(int links, int rechts) {
 		int vorLinks, vorRechts, mitte, mittIndex, hilfe;
 		
@@ -55,11 +62,25 @@ public class QuickSort{
 		} while (vorLinks <= vorRechts);
 		//ausgabeListe();
 		if(links < vorRechts){
-			quickSort(links, vorRechts);
+			if(multithreaded){
+				SortMulti d = new SortMulti();
+				d.setDaten(links, vorRechts,lastThread );
+				new Thread(d).start();
+				lastThread ++;
+			}else{
+				quickSort(links, vorRechts);
+			}
 		}
 		//ausgabeListe();
 		if(vorLinks < rechts){
-			quickSort(vorLinks, rechts);
+			if(multithreaded){
+				SortMulti d = new SortMulti();
+				d.setDaten(vorLinks, rechts,lastThread );
+				new Thread(d).start();
+				lastThread++;
+			}else{
+				quickSort(vorLinks, rechts);
+			}
 		}
 	}
 
@@ -97,5 +118,29 @@ public class QuickSort{
 		
 	}
 
+	
+	private class SortMulti implements Runnable{
+
+		private int links;
+		private int rechts;
+		private int id;
+		
+		public void setDaten(int l, int r, int i){
+			links = l;
+			rechts = r;
+			id = i;
+		}
+		
+		@Override
+		public void run() {
+			
+			quickSort(links, rechts);
+			
+			if(id == lastThread - 1){
+				fertig = true;
+			}
+		}
+		
+	}
 
 }
