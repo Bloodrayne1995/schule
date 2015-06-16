@@ -29,6 +29,8 @@ public class BinarySearch implements SuchInterfaceInteger {
 		}
 	}
 
+	
+	
 	@Override
 	public String getName() {
 		return "Binäres Suchen";

@@ -25,7 +25,7 @@ public class InterpolarSearch implements SuchInterfaceInteger {
 
 	@Override
 	public String getName() {
-		return "Interpoliertes Suchen";
+		return "Interpolarisiertes Suchen";
 	}
 
 }
