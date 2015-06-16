@@ -1,10 +1,15 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import randomArray.RandomArrayGenerator;
 import shellsort.ShellSort;
-import suchen.Suchen;
+import suchen.BinarySearch;
+import suchen.InterpolarSearch;
+import suchen.NaivSearch;
+import suchen.SuchCollection;
+import suchen.SuchInterfaceInteger;
 
 public class TestKlasse {
 
@@ -15,33 +20,20 @@ public class TestKlasse {
 		ShellSort s = new ShellSort();
 		int sw[] = {4,2,1};
 		feld = s.sort(feld, sw);
-		Suchen x = new Suchen();
-		
-		long startBin = 0;
-		long startNaiv = 0;
-		long endBin = 0;
-		long endNaiv = 0;
-		boolean ergBin = false;
-		boolean ergNaiv = false;
-		
-		startBin = System.nanoTime();
-		ergBin = x.bin(feld, random);
-		endBin = System.nanoTime();
-		
-		
-		startNaiv = System.nanoTime();
-		ergNaiv = x.naiv(feld, random);
-		endNaiv = System.nanoTime();
-
 		
 		System.out.println("Feld-Länge:\t" + feld.length);
 		System.out.println("Zahl die gesucht wurde:\t" + random);
-		System.out.println("Binäres Suchen: gefunden=" + ergBin + " Zeit (ns)=" + (endBin - startBin));
-		System.out.println("Naives Suchen: gefunden=" + ergNaiv + " Zeit (ns)=" + (endNaiv - startNaiv));
+		ArrayList<SuchInterfaceInteger> suchAlgorithmen = SuchCollection.getSuchCollection();
 		
-		
-		
-		
+		long start = 0;
+		long ende = 0;
+
+		for(SuchInterfaceInteger x:suchAlgorithmen){
+			start = System.nanoTime();
+			boolean b = x.suche(feld, random);
+			ende = System.nanoTime();
+			System.out.println(x.getName() + ": gefunden=" + b + " Zeit (ns)=" + (ende - start));
+		}
 		
 	}
 
