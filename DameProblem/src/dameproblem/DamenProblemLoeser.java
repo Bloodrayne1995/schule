@@ -17,6 +17,7 @@ public class DamenProblemLoeser {
 		for(int i = 0; i < laenge; i++){
 			feld[i] = -1;
 		}
+		
 	}
 	
 	public void belegeTestFeld(){
@@ -40,57 +41,29 @@ public class DamenProblemLoeser {
 	}
 	
 	public boolean setzeDame(int spalte){
-		if(spalte > laenge - 1){
-			return true;
-		}else{
-			for(int i=0; i < laenge - 1;i++){
-				if(pruefeDame(spalte, i)){
-					setzeDatenImFeld(spalte, i);
-					return setzeDame(spalte + 1);
+		feld[spalte] = 0;
+		while(feld[spalte] < feld.length){
+			if(isDameInGefahr(spalte)){
+				
+			}else{
+				if(spalte == feld.length - 1){
+					return true;
+				}else{
+					if(setzeDame(spalte + 1)){
+						return true;
+					}
 				}
 			}
-			return false;
+			feld[spalte]++;
 		}
+		return false;
 	}
 	
-	private boolean pruefeDame(int spalte, int zeile){
-//		return true;
-		//1-Dimensionales Feld in ein 2-Dimensionales Feld umsetzen
-		boolean arr[][] = new boolean[laenge][laenge];
-		for(int i = 0; i < laenge; i++){
-			for(int j = 0; j < laenge;j++){
-				arr[j][i] = false;
-			}
-		}
-		
-		for(int i = 0; i < laenge; i++){
-			arr[i][feld[i]] = true;
-		}
-		
-		//Prüfen
-		//Waagerecht
-		
-		boolean ergebnis = true;
-		for(int i = 0; i < laenge; i++){
-			if(arr[i][zeile] == true){
-				ergebnis = false;
-			}
-		}
-		if(ergebnis == false){
-			return ergebnis;
-		}
-		//Diagonal
-		
-		for(int i = 0; i < laenge; i++){
-			
-		}
-		
+	private boolean isDameInGefahr(int n){
+		return false;
 	}
 	
 	
-	private void setzeDatenImFeld(int s, int z){
-		feld[s] = z;
-	}
 	
 	
 	
