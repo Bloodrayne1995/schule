@@ -1,6 +1,10 @@
 package gui;
 
 
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 
 import dameproblem.DamenProblemLoeser;
@@ -11,7 +15,36 @@ public class Schachfeld extends JPanel {
 	private int feldBreite = 100;
 	private int feldLaenge = 100;
 	private DamenProblemLoeser dp = null;
+	private boolean dpFertig = false;
+	private ActionListener eventFertig = null;
 	
+	
+	public void setEventfertigListener(ActionListener x){
+		eventFertig = x;
+	}
+	
+	
+	
+	
+
+	/**
+	 * @return the dp
+	 */
+	public DamenProblemLoeser getDp() {
+		return dp;
+	}
+
+	/**
+	 * @param dp the dp to set
+	 */
+	public void setDp(DamenProblemLoeser dp) {
+		setLaenge(dp.getLaenge());
+		this.dp = dp;
+	}
+
+	public boolean isFertig(){
+		return dpFertig;
+	}
 	
 	/**
 	 * @return the laenge
@@ -53,11 +86,20 @@ public class Schachfeld extends JPanel {
 		dp = d;
 	}
 	
+	/**
+	 * 
+	 * @param d
+	 */
+	public Schachfeld(DamenProblemLoeser d){
+		setLaenge(d.getLaenge());
+		dp = d;
+	}
 	
 	/**
 	 * Generiert das Panel
 	 */
-	public void generate(){
+	private void generate(){
+		this.removeAll();
 		boolean s = true;	
 		this.setLayout(null);
 		for(int i = 0; i < laenge; i++){
@@ -79,7 +121,7 @@ public class Schachfeld extends JPanel {
 				s = !s;
 			}
 		}
-		this.setSize(laenge * feldBreite,laenge * feldLaenge);
+		//this.setSize(laenge * feldBreite,laenge * feldLaenge);
 		//this.setSize(1280, 720);
 	}
 	
@@ -99,5 +141,72 @@ public class Schachfeld extends JPanel {
 		}
 	}
 	
+	
+	
+	public void generateSync(){
+		dp.belegeFeld();
+		dp.setzeDame(0);
+		generate();
+	}
+	
+	public void generateAsync(){
+		new Thread(new AsyncThread()).start();
+		//new Thread(new AsyncThread2()).start();
+	}
+	
+	private class AsyncThread implements Runnable{
+
+		@Override
+		public void run() {
+			dp.belegeFeld();
+			dp.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					generate();
+					repaint();
+					try{
+						Thread.sleep(4);
+					}catch(Exception ex){
+						//ex.printStackTrace();
+					}
+				}
+			});
+			dp.setzeDame(0);
+			dpFertig = true;
+			if(eventFertig != null){
+				eventFertig.actionPerformed(null);
+			}
+		}
+		
+	}
+	
+	private class AsyncThread2 implements Runnable{
+
+		@Override
+		public void run() {
+			try{
+				Thread.sleep(100);
+			}catch(Exception e){
+				
+			}
+			boolean x = false;
+			while(!x){
+				generate();
+				repaint();
+				if(dpFertig ){
+					x = true;
+				}
+				try{
+					Thread.sleep(100);
+				}catch(Exception e){
+					
+				}
+			}
+			generate();
+			repaint();
+		}
+		
+	}
 	
 }
